@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Manager</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <div id="heading-container">
+            <h1 id="title">Orbit Contacts</h1>
+            <p id="slogan">Stay Connected, Stay in Orbit</p>
+        </div>
+        <div id="form-container">
+            <h3 id="register-title">Register</h3>
+            <p>Lets create your new account.</p>
+            <form id="createAccountForm">
+                <label for="firstName" class="labels">First Name</label>
+                <input type="text" id="firstName" name="firstName" required>
+                <label for="lastName" class="labels">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required>
+                <label for="username" class="labels">Username</label>
+                <input type="test" id="username" name="username" required>
+                <label for="password" class="labels">Password</label>
+                <input type="password" id="password" name="password" required>
+                <label for="confirmPassword" class="labels">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <button class="button" type="submit">Create Account</button>
+            </form>
+        </div>
+        <div id="login-container">
+            <p>Already have an account? <a href="index.html">Sign In</a></p>
+        </div>
+    </div>
+
+    
+    <script src="js/register.js"></script>
+</body>
+</html>
