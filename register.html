@@ -22,13 +22,14 @@
                 <label for="lastName" class="labels">Last Name</label>
                 <input type="text" id="lastName" name="lastName" required>
                 <label for="username" class="labels">Username</label>
-                <input type="test" id="username" name="username" required>
+                <input type="text" id="username" name="username" required>
                 <label for="password" class="labels">Password</label>
                 <input type="password" id="password" name="password" required>
                 <label for="confirmPassword" class="labels">Confirm Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" required>
-                <button class="button" type="submit">Create Account</button>
+                <button class="button" type="button" onclick="doRegister()">Create Account</button>
             </form>
+            <p id="registerError"></p>
         </div>
         <div id="login-container">
             <p>Already have an account? <a href="index.html">Sign In</a></p>
