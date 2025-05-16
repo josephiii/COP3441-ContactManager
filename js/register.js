@@ -19,14 +19,16 @@ function doRegister(){
     }
     
     //var passwordHash = md5(password);         this is optional
+    //change payload password to passwordHash if used
     
     const payload = {
         'firstName': firstName,
         'lastName': lastName,
         'username': username,
         'password': password
-    }
+    };
 
+    
     //implement the fetch or XMLHttpRequest
 
 }

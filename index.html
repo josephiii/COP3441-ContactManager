@@ -20,15 +20,15 @@
                 <input type="text" id="username" name="username" required>
                 <label for="password" class="labels">Password</label>
                 <input type="text" id="password" name="password" required>
-                <button class="button" type="submit">Login</button>
+                <button class="button" type="button" onclick="doLogin()">Login</button>
             </form>
+            <p id="loginError"></p>
         </div>
         <div id="register-container">
             <p>Dont have an account? <a href="register.html">Sign Up</a><p>
         </div>
     </div>
 
-    
     <script src="js/login.js"></script>
 </body>
 </html>
