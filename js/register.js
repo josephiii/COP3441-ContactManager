@@ -30,7 +30,7 @@ function doRegister(){
 
     
     //implement the fetch or XMLHttpRequest
-
+    //upon valid registration, notify user and reroute to login page
 }
 
 
