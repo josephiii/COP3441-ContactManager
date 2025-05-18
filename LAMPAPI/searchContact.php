@@ -1,6 +1,8 @@
 <?php
 
-$inData = getRequestInfo();
+header('Content-type: application/json');
+
+$data = json_decode(file_get_contents("php://input"), true);
 
 $searchResults = [];
 $conn = new mysqli('localhost', 'TheBeast', 'COP4331root', 'COP4331');
