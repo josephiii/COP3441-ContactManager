@@ -1,40 +1,46 @@
 <?php
-	$inData = getRequestInfo();
-	
-	$firstName = $inData["firstname"];
-	$lastName = $inData["lastname"]
-	$userId = $inData["userId"];
 
-	$conn = new mysqli('localhost', 'TheBeast', 'COP4331root', 'COP4331');
-	if ($conn->connect_error) 
-	{
-		returnWithError( $conn->connect_error );
-	} 
-	else
-	{
-		$stmt = $conn->prepare("INSERT into Users (UserId,Name) VALUES(?,?)");
-		$stmt->bind_param("ss", $userId, $firstName, $lastName);
-		$stmt->execute();
-		$stmt->close();
-		$conn->close();
-		returnWithError("");
-	}
+header('Content-type: application/json');
 
-	function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
-	}
+$data = json_decode(file_get_contents("php://input"), true);
 
-	function sendResultInfoAsJson( $obj )
-	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
-	
-	function returnWithError( $err )
-	{
-		$retValue = '{"error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
-?>
+$firstName = $data['firstName'];
+$lastName = $data['lastName'];
+$userId = $data['userId'];
+
+$conn = new mysqli('localhost', 'TheBeast', 'COP4331root', 'COP4331');
+
+if ($conn->connect_error) {
+    error('Connection Error: ' . $conn->connect_error);
+} else {
+    $stmt = $conn->prepare("INSERT into contacts (userId, firstName, lastName) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $userId, $firstName, $lastName);
+
+    if ($stmt->execute()) {
+        success('Contact added successfully', $conn->insert_id);
+    } else {
+        error('Failed to add contact: ' . $stmt->error);
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
+function success($message, $contactId)
+{
+    echo json_encode([
+        'success' => true,
+        'message' => $message,
+        'contactId' => $contactId
+    ]);
+    exit;
+}
+
+function error($errorMsg)
+{
+    echo json_encode([
+        'success' => false,
+        'errorMsg' => $errorMsg
+    ]);
+    exit;
+}
