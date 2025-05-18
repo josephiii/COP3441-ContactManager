@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    
+
     <div id="background">
         <div class="container">
             <div id="heading-container">
@@ -16,19 +16,19 @@
                 <p id="slogan">Stay Connected, Stay in Orbit</p>
             </div>
             <div id="form-container">
-                <h3 id="register-title">Register</h3>
+                <!-- <h3 id="register-title">Register</h3> -->
                 <p>Lets create your new account.</p>
                 <form id="createAccountForm">
                     <label for="firstName" class="labels">First Name</label>
-                    <input type="text" id="firstName" name="firstName" required>
+                    <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
                     <label for="lastName" class="labels">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" required>
+                    <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
                     <label for="username" class="labels">Username</label>
-                    <input type="text" id="username" name="username" required>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
                     <label for="password" class="labels">Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     <label for="confirmPassword" class="labels">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
                     <button class="button" type="button" onclick="doRegister()">Create Account</button>
                 </form>
                 <p id="registerError"></p>
