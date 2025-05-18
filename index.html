@@ -4,31 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Manager</title>
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <div class="container">
-        <div id="heading-container">
-            <h1 id="title">Orbit Contacts</h1>
-            <p id="slogan">Stay Connected, Stay in Orbit</p>
-        </div>
-        <div id="login-container">
-            <h3 id="login-title">Login</h3>
-            <form id="login-form">
-                <label for="username" class="labels">Username</label>
-                <input type="text" id="username" name="username" required>
-                <label for="password" class="labels">Password</label>
-                <input type="text" id="password" name="password" required>
-                <button class="button" type="button" onclick="doLogin()">Login</button>
-            </form>
-            <p id="loginError"></p>
-        </div>
-        <div id="register-container">
-            <p>Dont have an account? <a href="register.html">Sign Up</a><p>
+    <div id="background">
+        <div class="container">
+            <div id="heading-container">
+                <h1 id="title">ORBIT CONTACTS</h1>
+                <p id="slogan">Stay Connected, Stay in Orbit</p>
+            </div>
+            <div id="login-container">
+                <h3 id="login-title">Login</h3>
+                <form id="login-form">
+                    <label for="username" class="labels">Username</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password" class="labels">Password</label>
+                    <input type="text" id="password" name="password" required>
+                    <button class="button" type="button" onclick="doLogin()">Login</button>
+                </form>
+                <p id="loginError"></p>
+            </div>
+            <div id="register-container">
+                <p>Dont have an account? <a href="register.html">Sign Up</a><p>
+            </div>
         </div>
     </div>
 
     <script src="js/login.js"></script>
 </body>
-</html>
+</html> 
