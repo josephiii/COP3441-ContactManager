@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Homepage</title>
-    
+    <link rel="stylesheet" href="css/userHp.css">
 </head>
 <body>
     <div id="heading-container-homepage">
@@ -17,7 +17,7 @@
                 <input type="text" id="search" placeholder="Search Contacts...">
                 <button id="search-btn"><i class="search-icon"></i></button>
             </div>
-            <button id="add-contact-btn" class="primary-btn">+ Add Contact</button>
+            <button id="add-contact-btn" class="primary-btn" onclick="addContactModal()">+ Add Contact</button>
         </div>
         
         <!-- this is where contacts will be displayed -->
@@ -40,8 +40,8 @@
                     </div>
                 </div>
                 <div class="contact-actions">
-                    <button class="edit-btn" title="Edit Contact"><i class="edit-icon"></i></button>
-                    <button class="delete-btn" title="Delete Contact"><i class="delete-icon"></i></button>
+                    <button class="edit-btn" title="Edit Contact" onclick="editContactModal()"><i class="edit-icon"></i></button>
+                    <button class="delete-btn" title="Delete Contact" onclick="deleteContactModal()"><i class="delete-icon"></i></button>
                 </div>
             </div>
         </template>
@@ -76,7 +76,7 @@
                             <input type="text" id="address">
                         </div>
                         <div class="form-actions">
-                            <button type="button" id="cancel-btn" class="secondary-btn">Cancel</button>
+                            <button type="button" id="cancel-btn" class="secondary-btn" onclick="closeModal()">Cancel</button>
                             <button type="submit" id="save-btn" class="primary-btn">Save Contact</button>
                         </div>
                     </form>
@@ -93,7 +93,7 @@
                 <div class="modal-body">
                     <p>Are you sure you want to delete?</p>
                     <div class="form-actions">
-                        <button type="button" id="cancel-delete-btn" class="secondary-btn">Cancel</button>
+                        <button type="button" id="cancel-delete-btn" class="secondary-btn" onclick="closeModal()">Cancel</button>
                         <button type="button" id="confirm-delete-btn" class="danger-btn">Delete</button>
                     </div>
                 </div>
