@@ -25,6 +25,7 @@ body {
 }
 
 #background {
+    /* https://digitalmoons.itch.io/free-space-background */
     background-image: url('../images/Space Background.png');
     background-size: cover;
     display: flex;
@@ -45,8 +46,9 @@ h1 {
     background-color: var(--primary-950);
     padding: 40px 30px;
     border-radius: 8px;
-    border: 1px solid var(--neutral-800);
-    width: 400px
+    /*border: 1px solid var(--neutral-800);*/
+    box-shadow: 0 0px 10px var(--neutral-800);
+    width: 400px;
 }
 
 #heading-container {
@@ -131,4 +133,12 @@ a:hover {
     font-size: 1.2rem;
     color: var(--neutral-200);
     margin-bottom: 25px;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    height: 100px;
+    width: auto;
 }
