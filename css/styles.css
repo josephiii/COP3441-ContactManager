@@ -25,7 +25,8 @@ body {
 }
 
 #background {
-    background-color: black;
+    background-image: url('../images/Space Background.png');
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
