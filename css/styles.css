@@ -24,82 +24,9 @@ body {
     font-size: 16px;
 }
 
-#background {
-    /* https://digitalmoons.itch.io/free-space-background */
-    background-image: url('../images/Space Background.png');
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
 h1 {
     font-size: 2rem;
     font-weight: bold;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--primary-950);
-    padding: 40px 30px;
-    border-radius: 8px;
-    /*border: 1px solid var(--neutral-800);*/
-    box-shadow: 0 0px 10px var(--neutral-800);
-    width: 400px;
-}
-
-#heading-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 60px;
-}
-
-#slogan {
-    color: var(--primary-400);
-    margin-top: 10px;
-}
-
-#login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-/* #login-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-} */
-
-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.labels {
-    font-size: 0.9rem;
-    color: var(--primary-300);
-    margin-bottom: 5px;
-}
-
-input, button {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
-
-input {
-    border: 1px solid var(--neutral-800);
-    background-color: var(--primary-900);
-    color: white;
-    font-size: 1rem;
 }
 
 button {
@@ -114,6 +41,20 @@ button:hover {
     background: linear-gradient(to right, var(--primary-500), var(--secondary-500));
 }
 
+input {
+    border: 1px solid var(--neutral-800);
+    background-color: var(--primary-900);
+    color: white;
+    font-size: 1rem;
+}
+
+input, button {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
 a {
     color: var(--secondary-500);
 }
@@ -122,17 +63,10 @@ a:hover {
     color: var(--secondary-300);
 }
 
-#form-container {
+form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
-}
-
-#form-container p {
-    font-size: 1.2rem;
-    color: var(--neutral-200);
-    margin-bottom: 25px;
 }
 
 .logo {
@@ -141,4 +75,173 @@ a:hover {
     left: 20px;
     height: 100px;
     width: auto;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+#background {
+    /* https://digitalmoons.itch.io/free-space-background */
+    background-image: url('../images/Space Background.png');
+    background-size: cover;
+    height: 100vh;
+}
+
+.login-signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--primary-950);
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--neutral-800);
+    width: 400px;
+    z-index: 10;
+}
+
+#heading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+#slogan {
+    color: var(--primary-400);
+    margin-top: 10px;
+}
+
+#login-container, #form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.labels {
+    font-size: 0.9rem;
+    color: var(--primary-300);
+    margin-bottom: 5px;
+}
+
+#form-container p {
+    font-size: 1.2rem;
+    color: var(--neutral-200);
+    margin-bottom: 25px;
+}
+
+/* Basic modal styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+    overflow: auto; /* Enable scroll if needed */
+}
+
+/* Modal content box */
+.modal-content {
+    background-color: var(--primary-950);
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal header styling */
+.modal-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+/* Modal body styling */
+.modal-body {
+    margin-bottom: 20px;
+}
+
+/* Form groups inside modal */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Button styling */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.primary-btn, .secondary-btn, .danger-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.secondary-btn {
+    background: none;
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.danger-btn {
+    background: none;
+    background-color: #f44336;
+    color: white;
+}
+
+#heading-container-homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+#contacts-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--primary-950);
+    margin-top: 75px;
+    box-shadow: 0 0 10px var(--neutral-800);
+
+}
+
+#add-contact-btn {
+    flex-basis: 200px;
+    margin-left: 30px;
 }

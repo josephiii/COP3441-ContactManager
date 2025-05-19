@@ -14,30 +14,32 @@
             <img src = "images/CosmicLogo.png" alt = "Website Logo" class = "logo">
         </a>
         <div class="container">
-            <div id="heading-container">
-                <h1 id="title">ORBIT CONTACTS</h1>
-                <p id="slogan">Stay Connected, Stay in Orbit</p>
-            </div>
-            <div id="form-container">
-                <!-- <h3 id="register-title">Register</h3> -->
-                <p>Lets create your new account.</p>
-                <form id="createAccountForm">
-                    <label for="firstName" class="labels">First Name</label>
-                    <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
-                    <label for="lastName" class="labels">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
-                    <label for="username" class="labels">Username</label>
-                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                    <label for="password" class="labels">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                    <label for="confirmPassword" class="labels">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
-                    <button class="button" type="button" onclick="doRegister()">Create Account</button>
-                </form>
-                <p id="registerError"></p>
-            </div>
-            <div id="login-container">
-                <p>Already have an account? <a href="index.html">Sign In</a></p>
+            <div class="login-signup-container">
+                <div id="heading-container">
+                    <h1 id="title">ORBIT CONTACTS</h1>
+                    <p id="slogan">Stay Connected, Stay in Orbit</p>
+                </div>
+                <div id="form-container">
+                    <!-- <h3 id="register-title">Register</h3> -->
+                    <p>Lets create your new account.</p>
+                    <form id="createAccountForm">
+                        <label for="firstName" class="labels">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+                        <label for="lastName" class="labels">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+                        <label for="username" class="labels">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        <label for="password" class="labels">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        <label for="confirmPassword" class="labels">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                        <button class="button" type="button" onclick="doRegister()">Create Account</button>
+                    </form>
+                    <p id="registerError"></p>
+                </div>
+                <div id="login-container">
+                    <p>Already have an account? <a href="index.html">Sign In</a></p>
+                </div>
             </div>
         </div>
     </div>
