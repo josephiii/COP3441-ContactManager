@@ -238,10 +238,77 @@ form {
     background-color: var(--primary-950);
     margin-top: 75px;
     box-shadow: 0 0 10px var(--neutral-800);
+    border-radius: 5px;
 
 }
 
 #add-contact-btn {
     flex-basis: 200px;
     margin-left: 30px;
+}
+
+
+
+
+
+#contacts-list {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+  /* The contact card */
+.contact-card {
+    background-color: var(--primary-950);
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 0 10px var(--neutral-800);
+    width: 250px;
+    display: flex;
+}
+.contact-info {
+    flex: 4;
+}
+.contact-actions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.profile-line {
+    display: flex;
+    align-items: center;
+}
+.contact-name {
+    font-size: large;
+    padding-left: 15px;
+    padding-bottom: 5px;
+}
+.contact-email, .contact-phone, .contact-address {
+    padding-top: 5px;
+    font-size: small;
+}
+
+.edit-btn{
+    background: #FFD700;
+    width: 10px;
+    height: 10px;
+}
+.edit-btn:hover {
+    background: #FFC107;
+}
+.delete-btn{
+    background: #b71c1c;
+    width: 10px;
+    height: 10px;
+}
+.delete-btn:hover{
+    background: #7f0000;
+}
+
+.profileIcon {
+    height: 60px;
+    width: auto;
+    object-fit:fill;
 }

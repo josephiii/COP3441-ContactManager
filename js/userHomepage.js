@@ -50,6 +50,29 @@ function closeModal(){
     deleteModal.style.display = 'none';
 }
 
+// display local cards for styling, delete later
+function testDisplay(){
+
+    let firstName = document.getElementById('first-name').value;
+    let lastName = document.getElementById('last-name').value;
+    let email = document.getElementById('email').value;
+    let phoneNumber = document.getElementById('phone').value;
+    let address = document.getElementById('address').value;
+
+    const template = document.getElementById('contact-card-template');
+    const newCard = template.content.cloneNode(true);
+
+    newCard.querySelector('.contact-name').innerText = firstName + " " + lastName;
+    newCard.querySelector('.contact-email').innerText = email;
+    newCard.querySelector('.contact-phone').innerText = phoneNumber;
+    newCard.querySelector('.contact-address').innerText = address;
+
+
+
+    document.getElementById('contacts-list').appendChild(newCard);
+
+}
+
 // API PHP ENDPOINTS -------------------------
 
 function createContact(){

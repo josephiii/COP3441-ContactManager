@@ -32,7 +32,10 @@
                             <span class="initials"></span>
                         </div>
                         <div class="contact-details">
-                            <h3 class="contact-name"></h3>
+                            <div class = "profile-line">
+                                <img src="./images/Profile Icon.png" class = "profileIcon">
+                                <h3 class="contact-name"></h3>
+                            </div>
                             <p class="contact-email"></p>
                             <p class="contact-phone"></p>
                             <p class="contact-address"></p>
@@ -76,7 +79,7 @@
                             </div>
                             <div class="form-actions">
                                 <button type="button" id="cancel-btn" class="secondary-btn" onclick="closeModal()">Cancel</button>
-                                <button type="submit" id="save-btn" class="primary-btn">Save Contact</button>
+                                <button type="button" id="save-btn" class="primary-btn" onclick="testDisplay(); closeModal()">Save Contact</button>
                             </div>
                         </form>
                     </div>
