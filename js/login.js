@@ -1,6 +1,5 @@
 
 const urlBase = 'http://orbitcontacts.xyz';
-const extension = 'php';
 
 function doLogin(){
 
@@ -17,14 +16,43 @@ function doLogin(){
     //var hash = md5(password);         this is optional
     //change payload password to hash if used
 
-    const payload = {
+    const credentials = {
         'username': username,
         'password': password
     };
 
-    
-    //add fetch or XML
+    let url = urlBase + '/login.php';
 
+    let XMLRequest = new XMLHttpRequest();
+    XMLRequest.open('POST', url, true);
+    XMLRequest.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+
+    try{
+        XMLRequest.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+
+                let response = JSON.parse(XMLRequest.responseText);
+                let userId = response.userId;
+
+                if(userId == -1){
+                    document.getElementById('loginError').innerHTML = response.errorMsg;
+                    return;
+                }
+
+                localStorage.setItem('firstName', response.firstName);
+                localStorage.setItem('lastName', response.lastName);
+                localStorage.setItem('isValid', 'true');
+
+                window.location.href = 'userHomepage.html';
+            }
+        };
+
+        let payload = JSON.stringify(credentials);
+        XMLRequest.send(payload);
+
+    } catch(error){
+        document.getElementById('loginError').innerHTML = error.message;
+    }
 }
 
 function validateLogin(username, password){

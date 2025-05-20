@@ -1,7 +1,5 @@
 
 const urlBase = 'http://orbitcontacts.xyz';
-const extension = 'php';
-
 
 function doRegister(){
 
@@ -21,16 +19,44 @@ function doRegister(){
     //var passwordHash = md5(password);         this is optional
     //change payload password to passwordHash if used
     
-    const payload = {
+    const userInfo = {
         'firstName': firstName,
         'lastName': lastName,
         'username': username,
         'password': password
     };
 
-    
-    //implement the fetch or XMLHttpRequest
-    //upon valid registration, notify user and reroute to login page
+    let url = urlBase + '/register.php';
+
+    let XMLRequest = new XMLHttpRequest();
+    XMLRequest.open('POST', url, true);
+    XMLRequest.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+
+    try{
+        XMLRequest.onreadystatechange = function(){
+            if(this.readyState == 4){
+                if(this.status == 200){
+
+                    let response = JSON.parse(XMLRequest.responseText);
+                    if(response.success == true){
+                        //may want to notify successful account creation
+                        window.location.href = 'index.html';
+                    } else {
+                        document.getElementById('registerError').innerHTML = response.errorMsg;
+                    }
+
+                } else {
+                    document.getElementById('registerError').innerHTML = `Server Error: ${this.status}`;
+                }
+            }
+        };
+
+        let payload = JSON.stringify(userInfo);
+        XMLRequest.send(payload);
+
+    } catch(error){
+        document.getElementById('registerError').innerHTML = error.message;
+    }
 }
 
 

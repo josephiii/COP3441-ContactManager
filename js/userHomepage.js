@@ -1,13 +1,16 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    //verify user ID with localstorage or cookies
-    if(!isValidUser){
+    const firstName = localStorage.getItem('firstName');
+    const lastName = localStorage.getItem('lastName');
+    const isValid = localStorage.getItem('isValid') === 'true';
+
+    if(!isValid){
         alert('Please login to view contacts');
         window.location.href = '../index.html'
     }
 
-    //pull firstname and display to page
+    document.getElementById('greeting').innerHTML = `Hello, ${firstName} ${lastName}`;
 
     displayContacts();
 });
