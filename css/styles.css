@@ -260,12 +260,13 @@ form {
 
   /* The contact card */
 .contact-card {
-    background-color: var(--primary-950);
+    background-color: var(--primary-700);
     border-radius: 10px;
     padding: 16px;
     box-shadow: 0 0 10px var(--neutral-800);
-    width: 250px;
+    width: 300px;
     display: flex;
+    gap: 10px;
 }
 .contact-info {
     flex: 4;
@@ -275,6 +276,7 @@ form {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    justify-content: center;
 }
 .profile-line {
     display: flex;
@@ -291,7 +293,7 @@ form {
 }
 
 .edit-btn{
-    background: #FFD700;
+    background: var(--primary-300);
     width: 10px;
     height: 10px;
 }
@@ -299,7 +301,8 @@ form {
     background: #FFC107;
 }
 .delete-btn{
-    background: #b71c1c;
+    background: var(--primary-300);
+    ;
     width: 10px;
     height: 10px;
 }
@@ -310,5 +313,26 @@ form {
 .profileIcon {
     height: 60px;
     width: auto;
-    object-fit:fill;
+}
+
+.edit-btn, .delete-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-buttons {
+    width: 15px;
+    height: auto;
+}
+
+.optional-icons {
+    width: 20px;
+    height: auto;
+}
+
+.contact-email, .contact-address, .contact-phone {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }

@@ -21,7 +21,7 @@
             
             <!-- this is where contacts will be displayed -->
             <div id="contacts-list">
-                <div class="no-contacts-message">No contacts found.</div>
+                <!-- <div class="no-contacts-message">No contacts found.</div> -->
             </div>
             
             <!-- this is what the added contacts will look like -->
@@ -42,8 +42,8 @@
                         </div>
                     </div>
                     <div class="contact-actions">
-                        <button class="edit-btn" title="Edit Contact" onclick="editContactModal()"><i class="edit-icon"></i></button>
-                        <button class="delete-btn" title="Delete Contact" onclick="deleteContactModal()"><i class="delete-icon"></i></button>
+                        <button class="edit-btn" title="Edit Contact" onclick="editContactModal()"><i class="edit-icon"></i><img src = "./images/Edit.png" class = "edit-buttons"></button>
+                        <button class="delete-btn" title="Delete Contact" onclick="deleteContactModal()"><i class="delete-icon"></i><img src = "./images/Delete.png" class = "edit-buttons"></button>
                     </div>
                 </div>
             </template>
@@ -79,7 +79,7 @@
                             </div>
                             <div class="form-actions">
                                 <button type="button" id="cancel-btn" class="secondary-btn" onclick="closeModal()">Cancel</button>
-                                <button type="button" id="save-btn" class="primary-btn" onclick="testDisplay(); closeModal()">Save Contact</button>
+                                <button type="submit" id="save-btn" class="primary-btn">Save Contact</button>
                             </div>
                         </form>
                     </div>

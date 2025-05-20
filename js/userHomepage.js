@@ -51,7 +51,8 @@ function closeModal(){
 }
 
 // display local cards for styling, delete later
-function testDisplay(){
+document.getElementById('contact-form').addEventListener('submit', function(e) { 
+    e.preventDefault(); 
 
     let firstName = document.getElementById('first-name').value;
     let lastName = document.getElementById('last-name').value;
@@ -63,15 +64,29 @@ function testDisplay(){
     const newCard = template.content.cloneNode(true);
 
     newCard.querySelector('.contact-name').innerText = firstName + " " + lastName;
-    newCard.querySelector('.contact-email').innerText = email;
-    newCard.querySelector('.contact-phone').innerText = phoneNumber;
-    newCard.querySelector('.contact-address').innerText = address;
+    
+    if(email.length > 0) {
+        newCard.querySelector('.contact-email').innerHTML = 
+        `<img src = "./images/Mail.png" class = "optional-icons"><div>${email}</div>`;
+    }
 
+    
+    if(phoneNumber.length > 0) {
+        newCard.querySelector('.contact-phone').innerHTML =
+        `<img src = "./images/Phone.png" class = "optional-icons"><div>${phoneNumber}</div>`;
+    }
 
+    
+    if(address.length > 0) {
+        newCard.querySelector('.contact-address').innerHTML = 
+        `<img src = "./images/Address.png" class = "optional-icons"><div>${address}</div>`;
+    }
 
     document.getElementById('contacts-list').appendChild(newCard);
 
-}
+    closeModal();
+});
+
 
 // API PHP ENDPOINTS -------------------------
 
