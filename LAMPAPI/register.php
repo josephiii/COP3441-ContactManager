@@ -1,6 +1,6 @@
 <?PHP
 
-header('Content-type: application/json');
+header('Content-Type: application/json');
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -16,7 +16,7 @@ if ($conn->connect_error) {
     error('Connection Error: ' . $conn->connect_error);
 } else {
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE (username=?)");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE (login=?)");
     $stmt->bind_param("s", $username);
     $stmt->execute();
 
@@ -26,7 +26,7 @@ if ($conn->connect_error) {
         error('Username already exists');
     } else {
 
-        $stmt = $conn->prepare("INSERT INTO users (firstName, lastName, username, password) VALUES (?,?,?,?)");
+        $stmt = $conn->prepare("INSERT INTO users (firstName, lastName, login, password) VALUES (?,?,?,?)");
         $stmt->bind_param("ssss", $firstName, $lastName, $username, $password);
         $stmt->execute();
 

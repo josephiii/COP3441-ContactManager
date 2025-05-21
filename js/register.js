@@ -50,7 +50,7 @@ function doRegister(){
                 }
             }
         };
-
+ 
         let payload = JSON.stringify(userInfo);
         XMLRequest.send(payload);
 

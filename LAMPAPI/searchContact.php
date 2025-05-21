@@ -1,6 +1,6 @@
 <?php
 
-header('Content-type: application/json');
+header('Content-Type: application/json');
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -16,7 +16,7 @@ if ($conn->connect_error) {
     $userId = $inData["userId"];
     $stmt->bind_param("sss", $searchTerm, $searchTerm, $userId);
     $stmt->execute();
-    
+
     $result = $stmt->get_result();
 
     while ($row = $result->fetch_assoc()) {
@@ -61,4 +61,3 @@ function returnWithInfo($results)
     ];
     sendResultInfoAsJson($retValue);
 }
-?>

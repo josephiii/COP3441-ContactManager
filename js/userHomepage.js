@@ -2,7 +2,7 @@ const urlBase = 'http://orbitcontacts.xyz';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const firstName = localStorage.getItem('firstName');
+    const firstName = localStorage.getItem('firstName'); 
     const lastName = localStorage.getItem('lastName');
     const userId = localStorage.getItem('userId');
     const isValid = localStorage.getItem('isValid') === 'true';
@@ -70,7 +70,6 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     let lastName = document.getElementById('last-name').value;
     let email = document.getElementById('email').value;
     let phoneNumber = document.getElementById('phone').value;
-    let address = document.getElementById('address').value;
 
     const template = document.getElementById('contact-card-template');
     const newCard = template.content.cloneNode(true);
@@ -88,12 +87,6 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
         `<img src = "./images/Phone.png" class = "optional-icons"><div>${phoneNumber}</div>`;
     }
 
-    
-    if(address.length > 0) {
-        newCard.querySelector('.contact-address').innerHTML = 
-        `<img src = "./images/Address.png" class = "optional-icons"><div>${address}</div>`;
-    }
-
     document.getElementById('contacts-list').appendChild(newCard);
 
     closeModal();
@@ -102,9 +95,9 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
 
 // API PHP ENDPOINTS -------------------------
 
-function createContact(firstName, lastName, email, phoneNumber, address) {
+function createContact(firstName, lastName, email, phoneNumber) {
 
-    const contactError = validateContact(firstName, lastName, email, phoneNumber, address);
+    const contactError = validateContact(firstName, lastName, email, phoneNumber);
     
     if(contactError){
         document.getElementById('contactError').innerHTML = contactError;
@@ -116,7 +109,6 @@ function createContact(firstName, lastName, email, phoneNumber, address) {
         'lastName': lastName,
         'email': email,
         'phoneNumber': phoneNumber,
-        'address': address,
     };
 
     let url = `${urlBase}/addContact.php`;
@@ -128,8 +120,6 @@ function createContact(firstName, lastName, email, phoneNumber, address) {
     try{
         XMLRequest.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-                //display success
-                //clear input fields
                 
                 displayContacts(contacts);
             }
@@ -139,7 +129,7 @@ function createContact(firstName, lastName, email, phoneNumber, address) {
         XMLRequest.send(payload);
 
     } catch(error){
-        //display error
+        console.log('Create Contact Error: ', error);
     }
 }
 
