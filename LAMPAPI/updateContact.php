@@ -8,14 +8,16 @@ $contactId = $data['contactId'];
 $userId = $data['userId'];
 $firstName = $data['firstName'];
 $lastName = $data['lastName'];
+$phone = $data['phone'];
+$email = $data['email'];
 
 $conn = new mysqli('localhost', 'root', 'COP4331root', 'COP4331');
 
 if ($conn->connect_error) {
     returnWithError("Connection failed: " . $conn->connect_error);
 } else {
-    $stmt = $conn->prepare("UPDATE contacts SET firstName=?, lastName=?, WHERE ID=? AND userId=?");
-    $stmt->bind_param("ssii", $firstName, $lastName, $contactId, $userId);
+    $stmt = $conn->prepare("UPDATE contacts SET firstName=?, lastName=?, phone=?, email=? WHERE ID=? AND userId=?");
+    $stmt->bind_param("ssssii", $firstName, $lastName, $phone, $email, $contactId, $userId);
 
     if ($stmt->execute() && $stmt->affected_rows > 0) {
         returnWithSuccess("Contact updated successfully.");

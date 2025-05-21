@@ -13,7 +13,7 @@ if ($conn->connect_error) {
     returnWithError("Connection failed: " . $conn->connect_error);
 } else {
     $stmt = $conn->prepare("DELETE FROM contacts WHERE ID=? AND userId=?");
-    $stmt->bind_param("ss", $contactId, $userId);
+    $stmt->bind_param("ii", $contactId, $userId);
     
     if ($stmt->execute() && $stmt->affected_rows > 0) {
         returnWithSuccess("Contact deleted successfully.");
