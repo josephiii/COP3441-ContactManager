@@ -8,8 +8,6 @@ $contactId = $data['contactId'];
 $userId = $data['userId'];
 $firstName = $data['firstName'];
 $lastName = $data['lastName'];
-$phone = $data['phone'];
-$email = $data['email'];
 
 $conn = new mysqli('localhost', 'root', 'COP4331root', 'COP4331');
 
