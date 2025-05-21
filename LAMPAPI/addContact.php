@@ -8,7 +8,7 @@ $firstName = $data['firstName'];
 $lastName = $data['lastName'];
 $userId = $data['userId'];
 
-$conn = new mysqli('localhost', 'TheBeast', 'COP4331root', 'COP4331');
+$conn = new mysqli('localhost', 'root', 'COP4331root', 'COP4331');
 
 if ($conn->connect_error) {
     error('Connection Error: ' . $conn->connect_error);
