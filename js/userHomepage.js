@@ -1,3 +1,4 @@
+const urlBase = 'http://orbitcontacts.xyz';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -13,10 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('greeting').innerHTML = `Hello, ${firstName} ${lastName}`;
 
-    displayContacts();
+    // Searches for contacts with an empty search term
+    // which will display all contacts
+    searchContact();
 });
 
-function displayContacts(){
+// takes a list of contacts
+function displayContacts(contacts) {
     //shows all contacts added in users contact table
     //shows nothing if user has no contacts
 }
@@ -94,7 +98,7 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
 
 // API PHP ENDPOINTS -------------------------
 
-function createContact(){
+function createContact() {
     
     
 }
@@ -103,8 +107,32 @@ function updateContact(){
     //connects to updateContact.php
 }
 
-function searchContact(){
-    //connects to searchContact.php
+// connects to searchContact.php
+function searchContact() {
+    const searchTerm = document.getElementById('search').value;
+
+     const jsonPayload = JSON.stringify({
+        'search': searchTerm,
+        'userId': localStorage.getItem('userId')
+    });
+
+    const url = urlBase + '/searchContact.php';
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    
+    try {
+        xhr.onreadystatechange = () => {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(xhr.responseText);
+                displayContacts(response.results);
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch(error) {
+        console.error('Error:', error);
+    }
+
 }
 
 function deleteContact(){
