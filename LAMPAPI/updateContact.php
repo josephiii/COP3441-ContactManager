@@ -11,7 +11,7 @@ $lastName = $data['lastName'];
 $phone = $data['phone'];
 $email = $data['email'];
 
-$conn = new mysqli('localhost', 'TheBeast', 'COP4331root', 'COP4331');
+$conn = new mysqli('localhost', 'root', 'COP4331root', 'COP4331');
 
 if ($conn->connect_error) {
     returnWithError("Connection failed: " . $conn->connect_error);
