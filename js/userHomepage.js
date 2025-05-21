@@ -102,15 +102,51 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
 
 // API PHP ENDPOINTS -------------------------
 
-function createContact() {
+function createContact(firstName, lastName, email, phoneNumber, address) {
+
+    const contactError = validateContact(firstName, lastName, email, phoneNumber, address);
     
+    if(contactError){
+        document.getElementById('contactError').innerHTML = contactError;
+        return;
+    }
+
+    const contactInfo = {
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'phoneNumber': phoneNumber,
+        'address': address,
+    };
+
+    let url = `${urlBase}/addContact.php`;
+
+    let XMLRequest = new XMLHttpRequest();
+    XMLRequest.open('POST', url, true);
+    XMLRequest.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+
+    try{
+        XMLRequest.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                //display success
+                //clear input fields
+                
+                displayContacts(contacts);
+            }
+        };
+
+        let payload = JSON.stringify(contactInfo);
+        XMLRequest.send(payload);
+
+    } catch(error){
+        //display error
+    }
 }
 
 function updateContact(){
     //connects to updateContact.php
 }
 
-// connects to searchContact.php
 function searchContact() {
     const searchTerm = document.getElementById('search').value;
 
@@ -167,4 +203,27 @@ function deleteContact(event) {
     } catch(error) {
         console.error('Error:', error);
     }
+}
+
+function validateContact(firstName, lastName, email, phoneNumber, address){
+    if(!firstName || !lastName || !email || !phoneNumber || !address){
+        return 'All fields Required';
+    }
+
+    if(firstName.length > 50 || lastName.length > 50){
+        return 'First or Last name cannot exceed 50 characters';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\+?[0-9]{10,15}$/;
+
+    if(!emailRegex.test(email)){
+        return 'Please enter a valid email';
+    }
+
+    if(!phoneRegex.test(phoneNumber)){
+        return 'Please enter a valid phone number'
+    }
+
+    return null;
 }
