@@ -45,8 +45,12 @@ function editContactModel(){
     editModal.style.display = 'block';
 }
 
-function deleteContactModal(){
+function deleteContactModal(event) {
+    const contactCard = event.target.closest('.contact-card');
+    const contactId = contactCard.getAttribute('data-contact-id');
+
     const deleteModal = document.getElementById('delete-modal');
+    deleteModal.setAttribute('data-contact-id', contactId);
     deleteModal.style.display = 'block';
 }
 
@@ -100,7 +104,6 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
 
 function createContact() {
     
-    
 }
 
 function updateContact(){
@@ -135,6 +138,33 @@ function searchContact() {
 
 }
 
-function deleteContact(){
-    //connects to deleteContact.php
+function deleteContact(event) {
+    const contactId = document.getElementById('delete-modal').getAttribute('data-contact-id');
+
+    const jsonPayload = JSON.stringify({
+        'contactId': contactId,
+        'userId': localStorage.getItem('userId')
+    });
+
+    const url = urlBase + '/deleteContact.php';
+    const xhr = new XMLHttpRequest();
+    xhr.open('DELETE', url, true);
+    xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    
+    try {
+        xhr.onreadystatechange = () => {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (!response.success) {
+                    alert('Error deleting contact');
+                }
+
+                searchContact(); // Refresh the contact list
+                closeModal(); 
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch(error) {
+        console.error('Error:', error);
+    }
 }

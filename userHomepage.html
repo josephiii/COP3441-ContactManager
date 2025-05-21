@@ -46,7 +46,7 @@
                     </div>
                     <div class="contact-actions">
                         <button class="edit-btn" title="Edit Contact" onclick="editContactModal()"><i class="edit-icon"></i><img src = "./images/Edit.png" class = "edit-buttons"></button>
-                        <button class="delete-btn" title="Delete Contact" onclick="deleteContactModal()"><i class="delete-icon"></i><img src = "./images/Delete.png" class = "edit-buttons"></button>
+                        <button class="delete-btn" title="Delete Contact" onclick="deleteContactModal(event)"><i class="delete-icon"></i><img src = "./images/Delete.png" class = "edit-buttons"></button>
                     </div>
                 </div>
             </template>
@@ -99,7 +99,7 @@
                         <p>Are you sure you want to delete?</p>
                         <div class="form-actions">
                             <button type="button" id="cancel-delete-btn" class="secondary-btn" onclick="closeModal()">Cancel</button>
-                            <button type="button" id="confirm-delete-btn" class="danger-btn">Delete</button>
+                            <button type="button" id="confirm-delete-btn" class="danger-btn" onclick="deleteContact(event)">Delete</button>
                         </div>
                     </div>
                 </div>
