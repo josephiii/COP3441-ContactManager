@@ -7,7 +7,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 $contactId = $data['contactId'];
 $userId = $data['userId'];
 
-$conn = new mysqli('localhost', 'TheBeast', 'COP4331root', 'COP4331');
+$conn = new mysqli('localhost', 'root', 'COP4331root', 'COP4331');
 
 if ($conn->connect_error) {
     returnWithError("Connection failed: " . $conn->connect_error);
