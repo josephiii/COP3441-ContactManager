@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const firstName = localStorage.getItem('firstName');
     const lastName = localStorage.getItem('lastName');
+    const userId = localStorage.getItem('userId');
     const isValid = localStorage.getItem('isValid') === 'true';
 
     if(!isValid){
@@ -94,7 +95,8 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
 // API PHP ENDPOINTS -------------------------
 
 function createContact(){
-    //connects to addContact.php
+    
+    
 }
 
 function updateContact(){

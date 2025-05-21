@@ -41,6 +41,7 @@ function doLogin(){
 
                 localStorage.setItem('firstName', response.firstName);
                 localStorage.setItem('lastName', response.lastName);
+                localStorage.setItem('userId', response.userId);
                 localStorage.setItem('isValid', 'true');
 
                 window.location.href = 'userHomepage.html';
