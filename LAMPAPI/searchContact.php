@@ -5,7 +5,7 @@ header('Content-type: application/json');
 $data = json_decode(file_get_contents("php://input"), true);
 
 $searchResults = [];
-$conn = new mysqli('localhost', 'TheBeast', 'COP4331root', 'COP4331');
+$conn = new mysqli('localhost', 'root', 'COP4331root', 'COP4331');
 
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
