@@ -9,7 +9,7 @@ $lastName = $data['lastName'];
 $username = $data['username'];
 $password = $data['password'];
 
-$conn = new mysqli('localhost', 'root', 'COP4331root', 'COP4331');
+$conn = new mysqli('localhost', 'TheBeast', 'WeLoveCOP4331', 'COP4331');
 
 if ($conn->connect_error) {
 
