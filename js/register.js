@@ -26,7 +26,7 @@ function doRegister(){
         'password': password
     };
 
-    let url = urlBase + '/register.php';
+    let url = urlBase + '/LAMPAPI/register.php';
 
     let XMLRequest = new XMLHttpRequest();
     XMLRequest.open('POST', url, true);

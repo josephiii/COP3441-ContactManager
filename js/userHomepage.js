@@ -111,7 +111,7 @@ function createContact(firstName, lastName, email, phoneNumber) {
         'phoneNumber': phoneNumber,
     };
 
-    let url = `${urlBase}/addContact.php`;
+    let url = `${urlBase}/LAMPAPI/addContact.php`;
 
     let XMLRequest = new XMLHttpRequest();
     XMLRequest.open('POST', url, true);
@@ -145,7 +145,7 @@ function searchContact() {
         'userId': localStorage.getItem('userId')
     });
 
-    const url = urlBase + '/searchContact.php';
+    const url = urlBase + '/LAMPAPI/searchContact.php';
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
@@ -172,7 +172,7 @@ function deleteContact(event) {
         'userId': localStorage.getItem('userId')
     });
 
-    const url = urlBase + '/deleteContact.php';
+    const url = urlBase + '/LAMPAPI/deleteContact.php';
     const xhr = new XMLHttpRequest();
     xhr.open('DELETE', url, true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");

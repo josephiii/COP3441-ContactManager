@@ -21,7 +21,7 @@ function doLogin(){
         'password': password
     };
 
-    let url = urlBase + '/login.php';
+    let url = urlBase + '/LAMPAPI/login.php';
 
     let XMLRequest = new XMLHttpRequest();
     XMLRequest.open('POST', url, true);
