@@ -5,22 +5,22 @@ header('Content-Type: application/json');
 $data = json_decode(file_get_contents("php://input"), true);
 
 $searchResults = [];
-$conn = new mysqli('localhost', 'root', 'COP4331root', 'COP4331');
+$searchTerm = "%" . $data["search"] . "%";
+$userId = $data["userId"];
+
+$conn = new mysqli('localhost', 'TheBeast', 'WeLoveCOP4331', 'COP4331');
 
 if ($conn->connect_error) {
-    returnWithError($conn->connect_error);
+    returnWithError("Connection failed: " . $conn->connect_error);
 } else {
-    $stmt = $conn->prepare("SELECT ID, firstName, lastName FROM contacts WHERE (firstName LIKE ? OR lastName LIKE ?) AND userId=?");
-
-    $searchTerm = "%" . $inData["search"] . "%";
-    $userId = $inData["userId"];
-    $stmt->bind_param("sss", $searchTerm, $searchTerm, $userId);
+    $stmt = $conn->prepare("SELECT ID, FirstName, LastName, phone, email FROM Contacts WHERE (FirstName LIKE ? OR LastName LIKE ? OR phone LIKE ? OR email LIKE ?) AND userId=?");
+    $stmt->bind_param("ssssi", $searchTerm, $searchTerm, $searchTerm, $searchTerm, $userId);
     $stmt->execute();
 
     $result = $stmt->get_result();
 
-    while ($user = $result->fetch_assoc()) {
-        $searchResults[] = $user;
+    while ($row = $result->fetch_assoc()) {
+        $searchResults[] = $row;
     }
 
     if (count($searchResults) === 0) {
@@ -33,31 +33,20 @@ if ($conn->connect_error) {
     $conn->close();
 }
 
-function getRequestInfo()
-{
-    return json_decode(file_get_contents('php://input'), true);
-}
-
-function sendResultInfoAsJson($obj)
-{
-    header('Content-type: application/json');
-    echo json_encode($obj);
-}
-
 function returnWithError($err)
 {
-    $retValue = [
+    echo json_encode([
         "results" => [],
         "error" => $err
-    ];
-    sendResultInfoAsJson($retValue);
+    ]);
+    exit;
 }
 
 function returnWithInfo($results)
 {
-    $retValue = [
+    echo json_encode([
         "results" => $results,
         "error" => ""
-    ];
-    sendResultInfoAsJson($retValue);
+    ]);
+    exit;
 }
