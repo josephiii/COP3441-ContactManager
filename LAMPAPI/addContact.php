@@ -10,12 +10,12 @@ $userId = $data['userId'];
 $phone = $data['phone'];
 $email = $data['email'];
 
-$conn = new mysqli('localhost', 'root', 'COP4331root', 'COP4331');
+$conn = new mysqli('localhost', 'TheBeast', 'WeLoveCOP4331', 'COP4331');
 
 if ($conn->connect_error) {
     error('Connection Error: ' . $conn->connect_error);
 } else {
-    $stmt = $conn->prepare("INSERT INTO contacts (userId, firstName, lastName, phone, email) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO Contacts (userId, FirstName, LastName, phone, email) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("issss", $userId, $firstName, $lastName, $phone, $email);
 
     if ($stmt->execute()) {
