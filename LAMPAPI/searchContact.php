@@ -19,8 +19,8 @@ if ($conn->connect_error) {
 
     $result = $stmt->get_result();
 
-    while ($row = $result->fetch_assoc()) {
-        $searchResults[] = $row;
+    while ($user = $result->fetch_assoc()) {
+        $searchResults[] = $user;
     }
 
     if (count($searchResults) === 0) {
