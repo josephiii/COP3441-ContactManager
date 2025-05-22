@@ -21,7 +21,7 @@ if ($conn->connect_error) {
     $user = ($stmt->get_result())->fetch_assoc();
     if ($user) {
 
-        success($user['firstName'], $user['lastName'], $user['ID']);
+        success($user['FirstName'], $user['LastName'], $user['ID']);
     } else {
 
         error('Incorrect Username or Password');
