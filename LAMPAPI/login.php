@@ -14,7 +14,7 @@ if ($conn->connect_error) {
     error('Connection Error:' . $conn->connect_error);
 } else {
 
-    $stmt = $conn->prepare("SELECT firstName, lastName, ID FROM users where (login=? AND password=?)");
+    $stmt = $conn->prepare("SELECT FirstName, LastName, ID FROM Users where (Login=? AND Password=?)");
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
 
