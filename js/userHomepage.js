@@ -1,5 +1,7 @@
 const urlBase = 'http://orbitcontacts.xyz';
 
+let userId = 0;
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const firstName = localStorage.getItem('firstName'); 
@@ -16,6 +18,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Searches for contacts with an empty search term
     // which will display all contacts
     searchContact();
+});
+
+//form submit
+document.getElementById('contact-form').addEventListener('submit', function(e) { 
+    e.preventDefault(); 
+
+    let firstName = document.getElementById('first-name').value;
+    let lastName = document.getElementById('last-name').value;
+    let email = document.getElementById('email').value;
+    let phoneNumber = document.getElementById('phone').value;
+
+    createContact(firstName, lastName, email, phoneNumber);
+
+    closeModal();
 });
 
 // takes a list of contacts
@@ -100,7 +116,7 @@ function createContact(firstName, lastName, email, phoneNumber) {
         return;
     }
 
-    const userId = localStorage.getItem('userId');
+    //const userId = localStorage.getItem('userId');
     const contactInfo = {
         'firstName': firstName,
         'lastName': lastName,
@@ -136,7 +152,7 @@ function updateContact(){
 
 function searchContact() {
     const searchTerm = document.getElementById('search').value;
-    const userId = localStorage.getItem('userId');
+    //const userId = localStorage.getItem('userId');
     const jsonPayload = JSON.stringify({
         'search': searchTerm,
         'userId': userId
@@ -151,6 +167,7 @@ function searchContact() {
         xhr.onreadystatechange = function(){
             if (this.readyState == 4 && this.status == 200) {
                 let response = JSON.parse(xhr.responseText);
+                console.log(response.results);
                 displayContacts(response.results);
             }
         };
@@ -163,7 +180,7 @@ function searchContact() {
 
 function deleteContact() {
     const contactId = document.getElementById('delete-modal').getAttribute('data-contact-id');
-    const userId = localStorage.getItem('userId');
+    //const userId = localStorage.getItem('userId');
 
     const jsonPayload = JSON.stringify({
         'contactId': contactId,
