@@ -215,3 +215,12 @@ function validateContact(firstName, lastName, email, phoneNumber, address){
 
     return null;
 }
+
+function logOut(){
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('lstName');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('isValid');
+
+    window.location.href = '../index.html';
+}
