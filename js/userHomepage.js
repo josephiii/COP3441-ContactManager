@@ -1,5 +1,7 @@
 const urlBase = 'http://orbitcontacts.xyz';
 
+let userId = 0;
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const firstName = localStorage.getItem('firstName'); 
@@ -21,8 +23,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // takes a list of contacts
 function displayContacts(contacts) {
-    //shows all contacts added in users contact table
     //shows nothing if user has no contacts
+    if(contacts.length == 0) {
+        document.getElementById('no-contacts-message').innerText = 'No contacts found.';
+        return;
+    }
+
+    const refresh = document.getElementById('contacts-list');
+    refresh.innerHTML = '';
+
+    //shows all contacts added in users contact table
+    contacts.forEach(contact =>  {
+        const template = document.getElementById('contact-card-template');
+        const newCard = template.content.cloneNode(true);
+
+        newCard.querySelector('.contact-name').innerText = contact.FirstName + " " + contact.LastName;
+    
+        if(contact.email) {
+            newCard.querySelector('.contact-email').innerHTML = 
+            `<img src = "./images/Mail.png" class = "optional-icons"><div>${contact.email}</div>`;
+        }
+
+        if(contact.phone) {
+            newCard.querySelector('.contact-phone').innerHTML =
+            `<img src = "./images/Phone.png" class = "optional-icons"><div>${contact.phone}</div>`;
+        }
+
+        document.getElementById('contacts-list').appendChild(newCard);    
+    });
 }
 
 function addContactModal(){
@@ -71,23 +99,7 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     let email = document.getElementById('email').value;
     let phoneNumber = document.getElementById('phone').value;
 
-    const template = document.getElementById('contact-card-template');
-    const newCard = template.content.cloneNode(true);
-
-    newCard.querySelector('.contact-name').innerText = firstName + " " + lastName;
-    
-    if(email.length > 0) {
-        newCard.querySelector('.contact-email').innerHTML = 
-        `<img src = "./images/Mail.png" class = "optional-icons"><div>${email}</div>`;
-    }
-
-    
-    if(phoneNumber.length > 0) {
-        newCard.querySelector('.contact-phone').innerHTML =
-        `<img src = "./images/Phone.png" class = "optional-icons"><div>${phoneNumber}</div>`;
-    }
-
-    document.getElementById('contacts-list').appendChild(newCard);
+    createContact(firstName, lastName, email, phoneNumber);
 
     closeModal();
 });
@@ -108,10 +120,11 @@ function createContact(firstName, lastName, email, phoneNumber) {
         'firstName': firstName,
         'lastName': lastName,
         'email': email,
-        'phoneNumber': phoneNumber,
+        'phone': phoneNumber,
+        'userId': userId
     };
 
-    let url = `${urlBase}/LAMPAPI/addContact.php`;
+    let url = urlBase + '/LAMPAPI/addContact.php';
 
     let XMLRequest = new XMLHttpRequest();
     XMLRequest.open('POST', url, true);
@@ -120,8 +133,7 @@ function createContact(firstName, lastName, email, phoneNumber) {
     try{
         XMLRequest.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-                
-                displayContacts(contacts);
+                searchContact();
             }
         };
 
@@ -139,19 +151,18 @@ function updateContact(){
 
 function searchContact() {
     const searchTerm = document.getElementById('search').value;
-
-     const jsonPayload = JSON.stringify({
+    const jsonPayload = JSON.stringify({
         'search': searchTerm,
-        'userId': localStorage.getItem('userId')
+        'userId': userId
     });
 
     const url = urlBase + '/LAMPAPI/searchContact.php';
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
+    xhr.open('POST', url, true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
     
     try {
-        xhr.onreadystatechange = () => {
+        xhr.onreadystatechange = function(){
             if (this.readyState == 4 && this.status == 200) {
                 let response = JSON.parse(xhr.responseText);
                 displayContacts(response.results);
@@ -169,7 +180,7 @@ function deleteContact(event) {
 
     const jsonPayload = JSON.stringify({
         'contactId': contactId,
-        'userId': localStorage.getItem('userId')
+        'userId': userId
     });
 
     const url = urlBase + '/LAMPAPI/deleteContact.php';
@@ -196,7 +207,7 @@ function deleteContact(event) {
 }
 
 function validateContact(firstName, lastName, email, phoneNumber, address){
-    if(!firstName || !lastName || !email || !phoneNumber || !address){
+    if(!firstName || !lastName || !email || !phoneNumber){
         return 'All fields Required';
     }
 
