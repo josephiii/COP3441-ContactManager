@@ -35,6 +35,7 @@ function displayContacts(contacts) {
         const template = document.getElementById('contact-card-template');
         const newCard = template.content.cloneNode(true);
 
+        newCard.querySelector('.contact-card').setAttribute('data-contact-id', contact.ID);
         newCard.querySelector('.contact-name').innerText = contact.FirstName + " " + contact.LastName;
     
         if(contact.email) {
@@ -87,21 +88,6 @@ function closeModal(){
     contactModal.style.display = 'none';
     deleteModal.style.display = 'none';
 }
-
-// display local cards for styling, delete later
-document.getElementById('contact-form').addEventListener('submit', function(e) { 
-    e.preventDefault(); 
-
-    let firstName = document.getElementById('first-name').value;
-    let lastName = document.getElementById('last-name').value;
-    let email = document.getElementById('email').value;
-    let phoneNumber = document.getElementById('phone').value;
-
-    createContact(firstName, lastName, email, phoneNumber);
-
-    closeModal();
-});
-
 
 // API PHP ENDPOINTS -------------------------
 
@@ -175,7 +161,7 @@ function searchContact() {
 
 }
 
-function deleteContact(event) {
+function deleteContact() {
     const contactId = document.getElementById('delete-modal').getAttribute('data-contact-id');
     const userId = localStorage.getItem('userId');
 
@@ -190,15 +176,15 @@ function deleteContact(event) {
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
     
     try {
-        xhr.onreadystatechange = () => {
+        xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 let response = JSON.parse(xhr.responseText);
                 if (!response.success) {
                     alert('Error deleting contact');
                 }
 
-                searchContact(); // Refresh the contact list
-                closeModal(); 
+                closeModal();
+                searchContact(); // Refresh the contact list 
             }
         };
         xhr.send(jsonPayload);
