@@ -21,14 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // takes a list of contacts
 function displayContacts(contacts) {
+    const refresh = document.getElementById('contacts-list');
+    refresh.innerHTML = '';
+
     //shows nothing if user has no contacts
     if(contacts.length == 0) {
         document.getElementById('no-contacts-message').innerText = 'No contacts found.';
         return;
     }
-
-    const refresh = document.getElementById('contacts-list');
-    refresh.innerHTML = '';
 
     //shows all contacts added in users contact table
     contacts.forEach(contact =>  {
