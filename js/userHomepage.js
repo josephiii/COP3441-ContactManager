@@ -1,7 +1,5 @@
 const urlBase = 'http://orbitcontacts.xyz';
 
-let userId = 0;
-
 document.addEventListener('DOMContentLoaded', () => {
 
     const firstName = localStorage.getItem('firstName'); 
@@ -116,6 +114,7 @@ function createContact(firstName, lastName, email, phoneNumber) {
         return;
     }
 
+    const userId = localStorage.getItem('userId');
     const contactInfo = {
         'firstName': firstName,
         'lastName': lastName,
@@ -151,6 +150,7 @@ function updateContact(){
 
 function searchContact() {
     const searchTerm = document.getElementById('search').value;
+    const userId = localStorage.getItem('userId');
     const jsonPayload = JSON.stringify({
         'search': searchTerm,
         'userId': userId
@@ -177,6 +177,7 @@ function searchContact() {
 
 function deleteContact(event) {
     const contactId = document.getElementById('delete-modal').getAttribute('data-contact-id');
+    const userId = localStorage.getItem('userId');
 
     const jsonPayload = JSON.stringify({
         'contactId': contactId,
