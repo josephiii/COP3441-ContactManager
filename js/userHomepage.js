@@ -15,36 +15,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('greeting').innerHTML = `Hello, ${firstName} ${lastName}`;
 
-    // Searches for contacts with an empty search term
-    // which will display all contacts
+    //phone format
+    document.getElementById('phone').addEventListener('input', function(event) {
+        let value = event.target.value.replace(/\D/g, '');
+        if (value.length >= 6) {
+            value = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6,10)}`;
+        } else if (value.length >= 3) {
+            value = `(${value.slice(0,3)}) ${value.slice(3)}`; 
+        } else if (value.length > 0) {
+            value = `(${value}`;
+        }
+        event.target.value = value;
+    });
+
     searchContact();
-});
 
-//form submit
-document.getElementById('contact-form').addEventListener('submit', function(e) { 
-    e.preventDefault(); 
+    //form submit
+    document.getElementById('contact-form').addEventListener('submit', function(e) { 
+        e.preventDefault(); 
 
-    let firstName = document.getElementById('first-name').value;
-    let lastName = document.getElementById('last-name').value;
-    let email = document.getElementById('email').value;
-    let phoneNumber = document.getElementById('phone').value;
+        let firstName = document.getElementById('first-name').value;
+        let lastName = document.getElementById('last-name').value;
+        let email = document.getElementById('email').value;
+        let phoneNumber = document.getElementById('phone').value;
 
-    const contactError = validateContact(firstName, lastName, email, phoneNumber);  
-    if(contactError){
-        document.getElementById('contactError').innerHTML = contactError;
-        return;
-    }
+        const contactError = validateContact(firstName, lastName, email, phoneNumber);  
+        if(contactError){
+            document.getElementById('contactError').innerHTML = contactError;
+            return;
+        }
 
-    const contactModal = document.getElementById('contact-modal');
-    const isEdit = contactModal.getAttribute('data-is-edit');
-    if(isEdit == 'true') {
-        const contactId = contactModal.getAttribute('data-contact-id');
-        updateContact(contactId, firstName, lastName, email, phoneNumber);
-    } else {
-        createContact(firstName, lastName, email, phoneNumber);
-    }
+        const contactModal = document.getElementById('contact-modal');
+        const isEdit = contactModal.getAttribute('data-is-edit');
+        if(isEdit == 'true') {
+            const contactId = contactModal.getAttribute('data-contact-id');
+            updateContact(contactId, firstName, lastName, email, phoneNumber);
+        } else {
+            createContact(firstName, lastName, email, phoneNumber);
+        }
 
-    closeModal();
+        closeModal();
+    });
 });
 
 // takes a list of contacts
@@ -111,7 +122,17 @@ function editContactModal(event){
     document.getElementById('first-name').value = firstName;
     document.getElementById('last-name').value = lastName;
     document.getElementById('email').value = contactEmail;
-    document.getElementById('phone').value = contactPhone;
+
+    //phone format
+    let phone = contactPhone.replace(/\D/g, ''); 
+    if (phone.length >= 6) {
+        phone = `(${phone.slice(0,3)}) ${phone.slice(3,6)}-${phone.slice(6,10)}`;
+    } else if (phone.length >= 3) {
+        phone = `(${phone.slice(0,3)}) ${phone.slice(3)}`;
+    } else if (phone.length > 0) {
+        phone = `(${phone}`;
+    }
+    document.getElementById('phone').value = phone;
 
     editModal.style.display = 'block';
 }
@@ -260,7 +281,7 @@ function deleteContact() {
     }
 }
 
-function validateContact(firstName, lastName, email, phoneNumber, address){
+function validateContact(firstName, lastName, email, phoneNumber){
     if(!firstName || !lastName || !email || !phoneNumber){
         return 'All fields Required';
     }
@@ -270,14 +291,9 @@ function validateContact(firstName, lastName, email, phoneNumber, address){
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^\+?[0-9]{10,15}$/;
 
     if(!emailRegex.test(email)){
         return 'Please enter a valid email';
-    }
-
-    if(!phoneRegex.test(phoneNumber)){
-        return 'Please enter a valid phone number'
     }
 
     return null;
@@ -285,7 +301,7 @@ function validateContact(firstName, lastName, email, phoneNumber, address){
 
 function logOut(){
     localStorage.removeItem('firstName');
-    localStorage.removeItem('lstName');
+    localStorage.removeItem('lastName');
     localStorage.removeItem('userId');
     localStorage.removeItem('isValid');
 
