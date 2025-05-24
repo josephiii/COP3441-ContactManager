@@ -23,7 +23,6 @@
                 <button id="add-contact-btn" class="primary-btn" onclick="addContactModal()">+ Add Contact</button>
             </div>
             
-            <p id="contactError"></p>
             
             <!-- this is where contacts will be displayed -->
             <div id="contacts-list"></div>
@@ -46,7 +45,7 @@
                         </div>
                     </div>
                     <div class="contact-actions">
-                        <button class="edit-btn" title="Edit Contact" onclick="editContactModal()"><i class="edit-icon"></i><img src = "./images/Edit.png" class = "edit-buttons"></button>
+                        <button class="edit-btn" title="Edit Contact" onclick="editContactModal(event)"><i class="edit-icon"></i><img src = "./images/Edit.png" class = "edit-buttons"></button>
                         <button class="delete-btn" title="Delete Contact" onclick="deleteContactModal(event)"><i class="delete-icon"></i><img src = "./images/Delete.png" class = "edit-buttons"></button>
                     </div>
                 </div>
@@ -77,6 +76,7 @@
                                 <label for="phone">Phone Number</label>
                                 <input type="tel" id="phone">
                             </div>
+                            <p id="contactError"></p>
                             <div class="form-actions">
                                 <button type="button" id="cancel-btn" class="secondary-btn" onclick="closeModal()">Cancel</button>
                                 <button type="submit" id="save-btn" class="primary-btn">Save Contact</button>

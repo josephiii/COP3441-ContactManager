@@ -1,6 +1,6 @@
 const urlBase = 'http://orbitcontacts.xyz';
 
-let userId = 0;
+// let userId = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -29,7 +29,20 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     let email = document.getElementById('email').value;
     let phoneNumber = document.getElementById('phone').value;
 
-    createContact(firstName, lastName, email, phoneNumber);
+    const contactError = validateContact(firstName, lastName, email, phoneNumber);  
+    if(contactError){
+        document.getElementById('contactError').innerHTML = contactError;
+        return;
+    }
+
+    const contactModal = document.getElementById('contact-modal');
+    const isEdit = contactModal.getAttribute('data-is-edit');
+    if(isEdit == 'true'){
+        const contactId = contactModal.getAttribute('data-contact-id');
+        updateContact(contactId, firstName, lastName, email, phoneNumber);
+    } else {
+        createContact(firstName, lastName, email, phoneNumber);
+    }
 
     closeModal();
 });
@@ -70,6 +83,7 @@ function displayContacts(contacts) {
 
 function addContactModal(){
     const addModal = document.getElementById('contact-modal');
+    addModal.setAttribute('data-is-edit', 'false');
 
     document.getElementById('modal-title').innerHTML = 'Add New Contact';
     document.getElementById('contact-form').reset();
@@ -78,10 +92,14 @@ function addContactModal(){
     addModal.style.display = 'block';
 }
 
-function editContactModel(){
+function editContactModal(event){
     const editModal = document.getElementById('contact-modal');
-
+    editModal.setAttribute('data-is-edit', 'true');
     document.getElementById('modal-title').innerHTML = 'Edit Contact';
+
+    const contactCard = event.target.closest('.contact-card');
+    const contactId = contactCard.getAttribute('data-contact-id');
+    editModal.setAttribute('data-contact-id', contactId);
     
     //display contact info
 
@@ -108,15 +126,7 @@ function closeModal(){
 // API PHP ENDPOINTS -------------------------
 
 function createContact(firstName, lastName, email, phoneNumber) {
-
-    const contactError = validateContact(firstName, lastName, email, phoneNumber);
-    
-    if(contactError){
-        document.getElementById('contactError').innerHTML = contactError;
-        return;
-    }
-
-    //const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
     const contactInfo = {
         'firstName': firstName,
         'lastName': lastName,
@@ -146,13 +156,44 @@ function createContact(firstName, lastName, email, phoneNumber) {
     }
 }
 
-function updateContact(){
-    //connects to updateContact.php
+function updateContact(contactId, firstName, lastName, email, phoneNumber) {
+    const userId = localStorage.getItem('userId');
+
+    const jsonPayload = JSON.stringify({
+        'contactId': contactId,
+        'userId': userId,
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'phone': phoneNumber
+    });
+
+    const url = urlBase + '/LAMPAPI/updateContact.php';
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', url, true);
+    xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    
+    try {
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (!response.success) {
+                    alert('Error updating contact');
+                }
+
+                closeModal();
+                searchContact(); // Refresh the contact list 
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch(error) {
+        console.error('Error:', error);
+    }
 }
 
 function searchContact() {
     const searchTerm = document.getElementById('search').value;
-    //const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
     const jsonPayload = JSON.stringify({
         'search': searchTerm,
         'userId': userId
@@ -167,7 +208,6 @@ function searchContact() {
         xhr.onreadystatechange = function(){
             if (this.readyState == 4 && this.status == 200) {
                 let response = JSON.parse(xhr.responseText);
-                console.log(response.results);
                 displayContacts(response.results);
             }
         };
@@ -180,7 +220,7 @@ function searchContact() {
 
 function deleteContact() {
     const contactId = document.getElementById('delete-modal').getAttribute('data-contact-id');
-    //const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
 
     const jsonPayload = JSON.stringify({
         'contactId': contactId,
