@@ -37,7 +37,7 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
 
     const contactModal = document.getElementById('contact-modal');
     const isEdit = contactModal.getAttribute('data-is-edit');
-    if(isEdit == 'true'){
+    if(isEdit == 'true') {
         const contactId = contactModal.getAttribute('data-contact-id');
         updateContact(contactId, firstName, lastName, email, phoneNumber);
     } else {
@@ -101,7 +101,17 @@ function editContactModal(event){
     const contactId = contactCard.getAttribute('data-contact-id');
     editModal.setAttribute('data-contact-id', contactId);
     
-    //display contact info
+    // Prepopulate the form with existing contact data
+    const contactName = contactCard.querySelector('.contact-name').innerText.split(' ');
+    const firstName = contactName[0];
+    const lastName = contactName[1];
+    const contactEmail = contactCard.querySelector('.contact-email').innerText;
+    const contactPhone = contactCard.querySelector('.contact-phone').innerText;
+
+    document.getElementById('first-name').value = firstName;
+    document.getElementById('last-name').value = lastName;
+    document.getElementById('email').value = contactEmail;
+    document.getElementById('phone').value = contactPhone;
 
     editModal.style.display = 'block';
 }
