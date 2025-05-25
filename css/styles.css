@@ -87,9 +87,15 @@ form {
 
 #background {
     /* https://digitalmoons.itch.io/free-space-background */
-    background-image: url('../images/Space Background.png');
-    background-size: cover;
-    height: 100vh;
+    /* background-image: url('../images/Space Background.png');
+    background-size: cover; */
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
 }
 
 .login-signup-container {
@@ -247,10 +253,6 @@ form {
     margin-left: 30px;
 }
 
-
-
-
-
 #contacts-list {
     margin-top: 20px;
     display: flex;
@@ -335,4 +337,23 @@ form {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.star {
+    background-color: white;
+    border-radius: 50%;
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    animation: twinkle 1.5s infinite;
+    z-index: -1;
 }

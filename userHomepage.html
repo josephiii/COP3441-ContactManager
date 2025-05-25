@@ -8,101 +8,102 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <div id="background">
-        <a href = "index.html">
-            <img src = "images/CosmicLogo.png" alt = "Website Logo" class = "logo">
-        </a>
-        <div id="heading-container-homepage">
-            <h1 id="heading-title-homepage">Orbit Contacts</h1>
-            <h3 id="greeting"></h3>
-            <button id="logout-btn" type="button" onclick="logOut()">Logout</button>  <!-- this needs styling -->
+    <div id="background"></div>
+    <a href = "index.html">
+        <img src = "images/CosmicLogo.png" alt = "Website Logo" class = "logo">
+    </a>
+    <div id="heading-container-homepage">
+        <h1 id="heading-title-homepage">Orbit Contacts</h1>
+        <h3 id="greeting"></h3>
+        <button id="logout-btn" type="button" onclick="logOut()">Logout</button>  <!-- this needs styling -->
+    </div>
+    <div id="contacts-container">
+        <div class="top-bar">
+            <input type="text" id="search" oninput="searchContact()" placeholder="Search by name, email, or phone...">
+            <button id="add-contact-btn" class="primary-btn" onclick="addContactModal()">+ Add Contact</button>
         </div>
-        <div id="contacts-container">
-            <div class="top-bar">
-                <input type="text" id="search" oninput="searchContact()" placeholder="Search by name, email, or phone...">
-                <button id="add-contact-btn" class="primary-btn" onclick="addContactModal()">+ Add Contact</button>
-            </div>
-            
-            
-            <!-- this is where contacts will be displayed -->
-            <div id="contacts-list"></div>
-            <div id="no-contacts-message"></div>
-            
-            <!-- this is what the added contacts will look like -->
-            <template id="contact-card-template">
-                <div class="contact-card" data-contact-id="">
-                    <div class="contact-info">
-                        <div class="contact-avatar">
-                            <span class="initials"></span> 
-                        </div>
-                        <div class="contact-details">
-                            <div class = "profile-line">
-                                <img src="./images/Profile Icon.png" class = "profileIcon">
-                                <h3 class="contact-name"></h3>
-                            </div>
-                            <p class="contact-email"></p>
-                            <p class="contact-phone"></p>
-                        </div>
+        
+        
+        <!-- this is where contacts will be displayed -->
+        <div id="contacts-list"></div>
+        <div id="no-contacts-message"></div>
+        
+        <!-- this is what the added contacts will look like -->
+        <template id="contact-card-template">
+            <div class="contact-card" data-contact-id="">
+                <div class="contact-info">
+                    <div class="contact-avatar">
+                        <span class="initials"></span> 
                     </div>
-                    <div class="contact-actions">
-                        <button class="edit-btn" title="Edit Contact" onclick="editContactModal(event)"><i class="edit-icon"></i><img src = "./images/Edit.png" class = "edit-buttons"></button>
-                        <button class="delete-btn" title="Delete Contact" onclick="deleteContactModal(event)"><i class="delete-icon"></i><img src = "./images/Delete.png" class = "edit-buttons"></button>
+                    <div class="contact-details">
+                        <div class = "profile-line">
+                            <img src="./images/Profile Icon.png" class = "profileIcon">
+                            <h3 class="contact-name"></h3>
+                        </div>
+                        <p class="contact-email"></p>
+                        <p class="contact-phone"></p>
                     </div>
                 </div>
-            </template>
-            
-            <!-- this will appear when user wants to add/edit a contact -->
-            <div id="contact-modal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 id="modal-title">Add New Contact</h2>
-                    </div>
-                    <div class="modal-body">
-                        <form id="contact-form">
-                            <input type="hidden" id="contact-id">
-                            <div class="form-group">
-                                <label for="first-name">First Name*</label>
-                                <input type="text" id="first-name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="last-name">Last Name*</label>
-                                <input type="text" id="last-name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone Number</label>
-                                <input type="tel" id="phone">
-                            </div>
-                            <p id="contactError"></p>
-                            <div class="form-actions">
-                                <button type="button" id="cancel-btn" class="secondary-btn" onclick="closeModal()">Cancel</button>
-                                <button type="submit" id="save-btn" class="primary-btn">Save Contact</button>
-                            </div>
-                        </form>
-                    </div>
+                <div class="contact-actions">
+                    <button class="edit-btn" title="Edit Contact" onclick="editContactModal(event)"><i class="edit-icon"></i><img src = "./images/Edit.png" class = "edit-buttons"></button>
+                    <button class="delete-btn" title="Delete Contact" onclick="deleteContactModal(event)"><i class="delete-icon"></i><img src = "./images/Delete.png" class = "edit-buttons"></button>
                 </div>
             </div>
-            
-            <!-- this will appear when user wants to delete a contact -->
-            <div id="delete-modal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2>Delete Contact?</h2>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete?</p>
+        </template>
+        
+        <!-- this will appear when user wants to add/edit a contact -->
+        <div id="contact-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modal-title">Add New Contact</h2>
+                </div>
+                <div class="modal-body">
+                    <form id="contact-form">
+                        <input type="hidden" id="contact-id">
+                        <div class="form-group">
+                            <label for="first-name">First Name*</label>
+                            <input type="text" id="first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name*</label>
+                            <input type="text" id="last-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <p id="contactError"></p>
                         <div class="form-actions">
-                            <button type="button" id="cancel-delete-btn" class="secondary-btn" onclick="closeModal()">Cancel</button>
-                            <button type="button" id="confirm-delete-btn" class="danger-btn" onclick="deleteContact()">Delete</button>
+                            <button type="button" id="cancel-btn" class="secondary-btn" onclick="closeModal()">Cancel</button>
+                            <button type="submit" id="save-btn" class="primary-btn">Save Contact</button>
                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- this will appear when user wants to delete a contact -->
+        <div id="delete-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Delete Contact?</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete?</p>
+                    <div class="form-actions">
+                        <button type="button" id="cancel-delete-btn" class="secondary-btn" onclick="closeModal()">Cancel</button>
+                        <button type="button" id="confirm-delete-btn" class="danger-btn" onclick="deleteContact()">Delete</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="js/background.js"></script>
     <script src="js/userHomepage.js"></script>
 </body>
 </html>
