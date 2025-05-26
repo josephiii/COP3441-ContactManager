@@ -9,14 +9,20 @@
 </head>
 <body>
     <div id="background"></div>
-    <a href = "index.html">
-        <img src = "images/CosmicLogo.png" alt = "Website Logo" class = "logo">
-    </a>
-    <div id="heading-container-homepage">
-        <h1 id="heading-title-homepage">Orbit Contacts</h1>
-        <h3 id="greeting"></h3>
-        <button id="logout-btn" type="button" onclick="logOut()">Logout</button>  <!-- this needs styling -->
-    </div>
+    <header>
+        <div class="header-third">
+            <a href = "index.html">
+                <img id="homepage-logo" src="images/CosmicLogo.png" alt="Website Logo" class="logo">
+            </a>
+        </div>
+        <div id="heading-title-homepage" class="header-third">
+            <h1 id="heading-title-homepage">Orbit Contacts</h1>
+            <h3 id="greeting"></h3>
+        </div>
+        <div class="header-third">
+            <button id="logout-btn" type="button" onclick="logOut()">Logout</button>
+        </div>
+    </header>
     <div id="contacts-container">
         <div class="top-bar">
             <input type="text" id="search" oninput="searchContact()" placeholder="Search by name, email, or phone...">
