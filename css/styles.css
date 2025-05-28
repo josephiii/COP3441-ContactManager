@@ -22,6 +22,7 @@ body {
     color: white;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
+    min-width: 560px;
 }
 
 h1 {
@@ -293,11 +294,21 @@ header {
 }
 
 #contacts-list {
-    display: inline-flex;
-    flex-wrap: wrap;
-    max-width: 940px;
-    gap: 20px;
-    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+
+@media (max-width: 1100px) {
+    #contacts-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 730px) {
+    #contacts-list {
+        grid-template-columns: 1fr;
+    }
 }
 
   /* The contact card */
