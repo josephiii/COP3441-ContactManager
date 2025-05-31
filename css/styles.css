@@ -365,10 +365,9 @@ header {
 
 .profile-container {
     position: relative;
+    font-family: "Pacifico", sans-serif;
     text-align: center;
-    color: white;
     font-size: 24px;
-    font-weight: bold;
     height: 60px;
     width: auto;
 }
@@ -384,6 +383,20 @@ header {
     top: 50%;          
     left: 50%;         
     transform: translate(-50%, -50%);
+}
+
+.contact-style {
+    font-weight: bold;
+    background: linear-gradient(
+        135deg,
+        #e6e6e6 0%,
+        #c0c0c0 25%,
+        #f8f8f8 50%,
+        #a0a0a0 75%,
+        #d0d0d0 100%
+    );
+    color: transparent;
+    background-clip: text;
 }
 
 .edit-btn, .delete-btn {
