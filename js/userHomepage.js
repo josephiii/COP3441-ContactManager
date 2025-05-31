@@ -76,10 +76,10 @@ function displayContacts(contacts) {
         const newCard = template.content.cloneNode(true);
 
         newCard.querySelector('.contact-card').setAttribute('data-contact-id', contact.ID);
-        newCard.querySelector('.contact-name').innerText = contact.FirstName + " " + contact.LastName;
+        newCard.querySelector('.contact-name').textContent = contact.FirstName + " " + contact.LastName;
         
-        const randomProfile = Math.floor(Math.random() * 8) + 1;
-        newCard.querySelector('.profileIcon').src = `./images/Profile${randomProfile}.png`;
+        const initials = contact.FirstName.charAt(0).toUpperCase() + contact.LastName.charAt(0).toUpperCase();
+        newCard.getElementById('contact-initials').innerText = initials;
 
         if(contact.email) {
             newCard.querySelector('.contact-email').innerHTML = 

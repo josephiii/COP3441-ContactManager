@@ -363,9 +363,27 @@ header {
     background: #7f0000;
 }
 
-.profileIcon {
+.profile-container {
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
     height: 60px;
     width: auto;
+}
+
+.profile-container .profileIcon {
+    height: 60px;
+    width: auto;
+    display: block;
+}
+
+.profile-container .contact-style {
+    position: absolute;
+    top: 50%;          
+    left: 50%;         
+    transform: translate(-50%, -50%);
 }
 
 .edit-btn, .delete-btn {
