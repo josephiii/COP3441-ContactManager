@@ -57,11 +57,13 @@ input, button {
 }
 
 a {
-    color: var(--secondary-500);
+    color: white;
+    text-decoration: underline;
 }
 
 a:hover {
     color: var(--secondary-300);
+    text-decoration: underline;
 }
 
 form {
