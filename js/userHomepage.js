@@ -83,12 +83,12 @@ function displayContacts(contacts) {
 
         if(contact.email) {
             newCard.querySelector('.contact-email').innerHTML = 
-            `<img src = "./images/Mail.png" class = "optional-icons"><div>${contact.email}</div>`;
+            `<img src = "./images/Mail.png" class = "optional-icons" alt = "Email Icon"><div>${contact.email}</div>`;
         }
 
         if(contact.phone) {
             newCard.querySelector('.contact-phone').innerHTML =
-            `<img src = "./images/Phone.png" class = "optional-icons"><div>${contact.phone}</div>`;
+            `<img src = "./images/Phone.png" class = "optional-icons" alt = "Phone Icon"><div>${contact.phone}</div>`;
         }
 
         document.getElementById('contacts-list').appendChild(newCard);    
